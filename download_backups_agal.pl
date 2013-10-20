@@ -16,7 +16,18 @@ use lib dirname(__FILE__);
 # see DownloadExample.pm
 use Config::Download;
 
+
+my $SLEEP_TO_WOL = 10;
+
 print &Databases::dateNow." Comezo\n";
+
+# Se temos ao ordenador em Sleep, espertamolo cum paquete wakeonlan
+my $path = &Download::getPathBackups;
+my $wolCommand = &Download::getCommandWakeonlan;
+my $execwol = `$path/$wolCommand`;
+print &Databases::dateNow." $execwol";
+sleep $SLEEP_TO_WOL;
+
 
 my $server = &Download::getServer;
 my $serverOptions = &Download::getServerOptions;
@@ -26,7 +37,7 @@ my $wildcard = &Databases::getBackupName('*');
 
 
 # get all files from today 
-print &Databases::dateNow." Recolhendo Backups de hoje em ".&Download::getPathBackups."\n"; 
+print &Databases::dateNow." Recolhendo Backups de hoje em ".$path."\n"; 
 my @backups = `du -h $wildcard`;
 map { chomp($_); } @backups;
 

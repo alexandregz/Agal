@@ -6,15 +6,19 @@
 ###################################################################################
 package Download;
 
+use File::Basename;
 use Config::Databases;
 
 #my $SERVER = 'agal.dinaserver.com';
-my $SERVER = 'Alexandre@localhost';
+my $SERVER = 'localhost.dyndns.org';
+my $USER = 'Alexandre';
 my $SERVER_OPTIONS = '-P 22';
 
+my $MAC_WOL = 'aa:bb:cc:dd:ee:ff';
+my $PORT_WOL = 7;
+
 # path donde atopamos os backups
-#my $PATH_DOWNLOAD = '$HOME/path_download/';
-my $PATH_DOWNLOAD = '.';
+my $PATH_INICIAL = dirname($0);
 my $PATH_BACKUPS_LOCAL = '/Volumes/Datos/backups_AGAL/';
 
 
@@ -24,7 +28,7 @@ sub getConfig{
 
 
 sub getServer{
-	return $SERVER;
+	return $USER.'@'.$SERVER;
 }
 
 sub getServerOptions{
@@ -32,11 +36,16 @@ sub getServerOptions{
 }
 
 sub getPathBackups{
-	return $PATH_DOWNLOAD;
+	return $PATH_INICIAL;
 }
 
 sub getPathBackupsLocal{
 	return $PATH_BACKUPS_LOCAL;
+}
+
+# use ./wakeonlan perl script (http://gsd.di.uminho.pt/jpo/software/wakeonlan/)
+sub getCommandWakeonlan{
+	return "wakeonlan -p $PORT_WOL -i $SERVER $MAC_WOL";
 }
 
 1;
