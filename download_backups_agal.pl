@@ -23,10 +23,11 @@ print &Databases::dateNow." Comezo\n";
 
 # Se temos ao ordenador em Sleep, espertamolo cum paquete wakeonlan
 my $path = &Download::getPathBackups;
-my $wolCommand = &Download::getCommandWakeonlan;
-my $execwol = `$path/$wolCommand`;
-print &Databases::dateNow." $execwol";
-sleep $SLEEP_TO_WOL;
+if(my $wolCommand = &Download::getCommandWakeonlan) {
+	my $execwol = `$path/$wolCommand`;
+	print &Databases::dateNow." $execwol";
+	sleep $SLEEP_TO_WOL;
+}
 
 
 my $server = &Download::getServer;

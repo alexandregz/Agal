@@ -14,6 +14,8 @@ my $SERVER = 'localhost.dyndns.org';
 my $USER = 'Alexandre';
 my $SERVER_OPTIONS = '-P 22';
 
+#my $HAVE_WOL_HOST = undef;
+my $HAVE_WOL_HOST = 1;
 my $MAC_WOL = 'aa:bb:cc:dd:ee:ff';
 my $PORT_WOL = 7;
 
@@ -45,7 +47,9 @@ sub getPathBackupsLocal{
 
 # use ./wakeonlan perl script (http://gsd.di.uminho.pt/jpo/software/wakeonlan/)
 sub getCommandWakeonlan{
-	return "wakeonlan -p $PORT_WOL -i $SERVER $MAC_WOL";
+	return "wakeonlan -p $PORT_WOL -i $SERVER $MAC_WOL" if($HAVE_WOL_HOST);
+
+	return undef;
 }
 
 1;
