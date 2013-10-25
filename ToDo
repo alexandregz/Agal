@@ -1,0 +1,3 @@
+- remove config from Config/*.pm and create config/config.yml
+- restore process (admin to manage)
+- delete old backups
