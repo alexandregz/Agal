@@ -7,6 +7,9 @@
 package Databases;
 
 use strict;
+use File::Basename;
+
+#my $WHICH_BIN='/bin/which';
 
 # config
 my $DATE_BACKUP = `date +%Y%m%d`;
@@ -14,9 +17,21 @@ chomp($DATE_BACKUP);
 #$DATE_BACKUP .= "_".`date +%H%M`;
 #chomp($DATE_BACKUP);
 
-my $MYSQLDUMP_BIN = '/path/to/mysqldump --opt';
-my $COMPRESS_BIN = '/path/to/bzip2';
+my $MYSQLDUMP_BIN =  '/usr/local/mysql/bin/mysqldump';
+chomp($MYSQLDUMP_BIN);
+$MYSQLDUMP_BIN.= ' --opt';
+
+my $COMPRESS_BIN = '/bin/bzip2';
+#my $COMPRESS_BIN = `$WHICH_BIN bzip2`;
+#chomp($COMPRESS_BIN);
 my $BACKUP_NAME = 'DB_$db_'.$DATE_BACKUP.'.sql.bz2'; 
+
+# diretorio a gardar
+my $PATH_BACKUPS = dirname($0).'/backups/';
+
+
+# debug
+$MYSQLDUMP_BIN = '/Applications/MAMP/Library/bin/mysqldump --opt' if(-f '/Applications/MAMP/Library/bin/mysqldump');
 
 
 # para engadir databases 
@@ -72,7 +87,7 @@ sub getCompress{
 sub getBackupName{
     my $db = $_[0];
     
-    my $BACKUP_NAME_TMP = $BACKUP_NAME;
+    my $BACKUP_NAME_TMP = $PATH_BACKUPS.$BACKUP_NAME;
     $BACKUP_NAME_TMP =~ s/\$db/$db/;
     return $BACKUP_NAME_TMP;
 }
