@@ -12,15 +12,12 @@ use lib dirname(__FILE__);
 
 use Config::Download;
 
-my $BZCAT_PATH = '/bin/bzcat';
-#my $BZCAT_PATH = '/opt/local/bin/bzcat';
-
-my $MYSQL_PATH = '/usr/local/mysql/bin/mysql';
-#my $MYSQL_PATH = '/Applications/MAMP/Library/bin/mysql';
-
 my $usr = $ENV{"LOGNAME"};
 #debug
-#$usr = 'estraviz';
+$usr = 'estraviz';
+
+my $bzcatBin = &Databases::getBinBzcat; 
+my $mysqlBin = &Databases::getBinMysql; 
 
 
 print &Databases::dateNow." Comezo\n";
@@ -34,7 +31,7 @@ foreach my $db (@dbs) {
 
         my $backupName = &Databases::getBackupName($db);
         print &Databases::dateNow." Restaurando $backupName...\n";
-        `$BZCAT_PATH $backupName | $MYSQL_PATH -u $userDB -p$passwordDB $db`;
+        `$bzcatBin $backupName | $mysqlBin -u $userDB -p$passwordDB $db`;
 }
 
 print &Databases::dateNow." Fim\n";

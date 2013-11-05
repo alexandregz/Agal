@@ -29,9 +29,16 @@ my $BACKUP_NAME = 'DB_$db_'.$DATE_BACKUP.'.sql.bz2';
 # diretorio a gardar
 my $PATH_BACKUPS = dirname($0).'/backups/';
 
+# para restore
+my $BZCAT_BIN = '/bin/bzcat';
+my $MYSQL_BIN = '/usr/local/mysql/bin/mysql';
+
+
+
 
 # debug
 $MYSQLDUMP_BIN = '/Applications/MAMP/Library/bin/mysqldump --opt' if(-f '/Applications/MAMP/Library/bin/mysqldump');
+$BZCAT_BIN = '/opt/local/bin/bzcat' if(-f '/opt/local/bin/bzcat');;
 
 
 # para engadir databases 
