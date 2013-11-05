@@ -14,7 +14,7 @@ use Config::Download;
 
 my $usr = $ENV{"LOGNAME"};
 #debug
-$usr = 'estraviz';
+#$usr = 'estraviz';
 
 my $bzcatBin = &Databases::getBinBzcat; 
 my $mysqlBin = &Databases::getBinMysql; 
