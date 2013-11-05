@@ -39,6 +39,7 @@ my $MYSQL_BIN = '/usr/local/mysql/bin/mysql';
 # debug
 $MYSQLDUMP_BIN = '/Applications/MAMP/Library/bin/mysqldump --opt' if(-f '/Applications/MAMP/Library/bin/mysqldump');
 $BZCAT_BIN = '/opt/local/bin/bzcat' if(-f '/opt/local/bin/bzcat');;
+$MYSQL_BIN = '/Applications/MAMP/Library/bin/mysql' if(-f '/Applications/MAMP/Library/bin/mysql');
 
 
 # para engadir databases 
