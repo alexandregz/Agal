@@ -4,4 +4,6 @@ Config/*.pm
 !Config/*Example.pm
 .*DS_Store
 backups/*
+!backups/backupsdir
 logs/*
+!logs/logsdir
